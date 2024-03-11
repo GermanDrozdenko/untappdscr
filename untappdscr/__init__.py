@@ -266,7 +266,7 @@ class UntappdScraper:
         beer_item    = html_doc .find('div', {'class': 'content'                   })
         stats        = html_doc .find('div', {'class': 'stats'                     }).findAll('span', {'class': 'count'})
         brewery      = beer_item.find('p'  , {'class': 'brewery'                   }).find('a')
-        description  = beer_item.find('div', {'class': 'beer-descrption-read-more' })
+        description  = beer_item.find('div', {'class': 'beer-descrption-read-less' })
         details      = beer_item.find('div', {'class': 'details'                   })
         beer         = self.beers.get(_id)
         breweryname  = brewery.attrs['href'][1:]
