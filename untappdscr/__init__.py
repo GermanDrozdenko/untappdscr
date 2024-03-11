@@ -66,6 +66,7 @@ class Beer:
     brewery  : Brewery
     details  : BeerDetails
     photo    : str
+    style    : str
     
 @dataclass
 class Venue:
@@ -270,6 +271,7 @@ class UntappdScraper:
         description  = beer_item.find('div', {'class': 'beer-descrption-read-less' })
         details      = beer_item.find('div', {'class': 'details'                   })
         photo        = html_doc .find('a'  , {'class': 'image-big'                 }).attrs['data-image']
+        style        = beer_item.find('p'  , {'class': 'style'                     }).find(text=True)
         beer         = self.beers.get(_id)
         breweryname  = brewery.attrs['href'][1:]
         self.breweries[breweryname] = self.breweries.get(breweryname) or Brewery( 
@@ -282,6 +284,7 @@ class UntappdScraper:
             'name'    : beer_item.find('h1').next   ,
             'brewery' : self.breweries[breweryname] ,
             'photo'   : photo                       ,
+            'style'   : style                       ,
             'details' : Beer.BeerDetails(
                 desc_half    =               description.next                                                                                    ,
                 date_added   =               None                                                                                                ,
